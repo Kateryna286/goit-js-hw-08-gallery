@@ -82,7 +82,7 @@ lightboxOverlay.addEventListener('click', onBackdropClick);
 
 function createItemCardsMarkup(galleryItems) {
     return galleryItems
-    .map(({ preview, original,  description}, index) => {
+    .map(({ preview, original,  description}) => {
         return `
         <li 
             class="gallery__item">
@@ -92,7 +92,6 @@ function createItemCardsMarkup(galleryItems) {
                 >
                 <img
                     class="gallery__image"
-                    id="${index+1}"
                     src="${preview}"
                     data-source="${original}"
                     alt="${description}"
@@ -105,12 +104,9 @@ function createItemCardsMarkup(galleryItems) {
 
 function getBigUrl(event) {
     const imgTargetEl = event.target;
-    console.log(imgTargetEl);
         
     lightboxContentImage.src = `${imgTargetEl.dataset.source}`;
     lightboxContentImage.alt = `${imgTargetEl.alt}`;
-    lightboxContentImage.id = `${imgTargetEl.id}`;
-    console.log(lightboxContentImage);
 }
 
 function modalOpen(event) {
@@ -126,19 +122,14 @@ function modalOpen(event) {
     getBigUrl(event);
         
     window.addEventListener('keydown', onEscKeyPress);
-    // window.addEventListener('keydown', onArrowClick);
 };
 
 function modalClose() {
     lightbox.classList.remove('is-open');
     lightboxContentImage.src = "";
     lightboxContentImage.alt = "";
-    //lightboxContentImage.removeAttribute("src");
-    //lightboxContentImage.removeAttribute("alt");
       
     window.removeEventListener('keydown', onEscKeyPress);
-    // window.removeEventListener('keydown', onArrowClick);
-
 };
 
 function onEscKeyPress(event) {
@@ -154,21 +145,3 @@ function onBackdropClick(event) {
       modalClose();
     }
 };
-
-//window.addEventListener('keydown', onArrowClick);
-
-// function onArrowClick(event) {
-//     const ArrR_KEY_CODE = 'ArrowRight';
-//     const ArrL_KEY_CODE = 'ArrowLeft';
-//     // const isArrRKey = event.code === ArrR_KEY_CODE;
-
-//     if(event.code === ArrR_KEY_CODE) {
-//         console.log('Click right');
-//         const imgTargetEl = event.target;
-//         const currentId = imgTargetEl.id;
-//         console.log(imgTargetEl);
-//     }
-//     else if (event.code === ArrL_KEY_CODE) {
-//         console.log('Click left');
-//     };
-// }
