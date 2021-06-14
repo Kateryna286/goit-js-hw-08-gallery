@@ -165,24 +165,55 @@ function onArrowClick(event) {
 
   const currentId = refs.lightboxContentImage.getAttribute("id");
 
-  if(event.code === ArrR_KEY_CODE && currentId < galleryItems.length) {
-      const newId = + currentId + 1;
-      addNewArgInImg(newId);
-  }
+      if(event.code === ArrR_KEY_CODE) {
+          const newId = + currentId + 1;
+          changeImgArgByPressRight (newId);
+      }
 
-  else if (event.code === ArrL_KEY_CODE && currentId > 1) {
-      const newId = + currentId - 1;
-      addNewArgInImg(newId);
+      else if (event.code === ArrL_KEY_CODE) {
+          const newId = + currentId - 1;
+          changeImgArgByPressLeft (newId);
+      }
   
-  }
 };
 
-function addNewArgInImg (arg) {        
+function changeImgArgByPressRight (arg) { 
+  if (arg <= galleryItems.length) {      
       const nextImg = document.getElementById(`${arg}`);
       const nextSrc = nextImg.getAttribute("data-source");
       
 
       refs.lightboxContentImage.id = `${arg}`;
       refs.lightboxContentImage.src = `${nextSrc}`;
+  }
+  else {
+      const nextImg = document.getElementById(`${arg-galleryItems.length}`);
+      const nextSrc = nextImg.getAttribute("data-source");
+      
 
+      refs.lightboxContentImage.id = `${arg-galleryItems.length}`;
+      refs.lightboxContentImage.src = `${nextSrc}`;
+  }
+
+
+
+};
+
+function changeImgArgByPressLeft (arg) { 
+  if (arg >= 1) {      
+      const nextImg = document.getElementById(`${arg}`);
+      const nextSrc = nextImg.getAttribute("data-source");
+      
+
+      refs.lightboxContentImage.id = `${arg}`;
+      refs.lightboxContentImage.src = `${nextSrc}`;
+  }
+  else {
+      const nextImg = document.getElementById(`${arg+galleryItems.length}`);
+      const nextSrc = nextImg.getAttribute("data-source");
+      
+
+      refs.lightboxContentImage.id = `${arg+galleryItems.length}`;
+      refs.lightboxContentImage.src = `${nextSrc}`;
+  }
 };
