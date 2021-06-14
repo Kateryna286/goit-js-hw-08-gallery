@@ -107,7 +107,6 @@ function createItemCardsMarkup(galleryItems) {
 function getImgAttributes(event) {
 
   const imgTargetEl = event.target;
-  console.log(imgTargetEl);
       
   refs.lightboxContentImage.src = `${imgTargetEl.dataset.source}`;
   refs.lightboxContentImage.alt = `${imgTargetEl.alt}`;
@@ -166,12 +165,12 @@ function onArrowClick(event) {
 
   const currentId = refs.lightboxContentImage.getAttribute("id");
 
-  if(event.code === ArrR_KEY_CODE) {
+  if(event.code === ArrR_KEY_CODE && currentId < galleryItems.length) {
       const newId = + currentId + 1;
       addNewArgInImg(newId);
   }
 
-  else if (event.code === ArrL_KEY_CODE) {
+  else if (event.code === ArrL_KEY_CODE && currentId > 1) {
       const newId = + currentId - 1;
       addNewArgInImg(newId);
   
